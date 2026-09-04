@@ -83,13 +83,15 @@ export const GOOGLE_MAPS_SEARCH_URL =
 // =============================================================================
 
 /**
- * Форматирана цена в EUR (при наем се добавя „/месец“).
+ * Форматирана цена в EUR (при наем се добавя „/месец“ или „/month“).
  * @param {number} priceEur - Цена в евро
  * @param {'sale'|'rent'} category - Категория
+ * @param {'bg'|'en'} [locale='bg'] - Език за суфикса при наем
  * @returns {{ eurText: string }}
  */
-export function formatPriceEur(priceEur, category) {
-  const suffix = category === "rent" ? "/месец" : "";
+export function formatPriceEur(priceEur, category, locale = "bg") {
+  const suffix =
+    category === "rent" ? (locale === "en" ? "/month" : "/месец") : "";
   const fmt = (n) =>
     new Intl.NumberFormat("bg-BG", {
       minimumFractionDigits: 0,

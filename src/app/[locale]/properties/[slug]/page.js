@@ -66,8 +66,7 @@ function buildMetaDescription(display, property, locale) {
   }
 
   if (property?.price != null && property.price !== '') {
-    let { eurText } = formatPriceEur(property.price, property.category);
-    if (isEn) eurText = eurText.replace('/месец', '/month');
+    const { eurText } = formatPriceEur(property.price, property.category, locale);
     parts.push(eurText);
   }
 
@@ -574,7 +573,7 @@ export default async function PropertyDetailPage({ params }) {
                     {title}
                   </h1>
                   <div className="text-graphite">
-                    <span className="text-3xl">{formatPriceEur(price, category).eurText}</span>
+                    <span className="text-3xl">{formatPriceEur(price, category, locale).eurText}</span>
                     {!hidePriceVat && (
                       <span className="block text-xs text-gray-500 mt-0.5">{priceIncludesVat ? t.priceWithVat : t.priceWithoutVat}</span>
                     )}
@@ -681,7 +680,7 @@ export default async function PropertyDetailPage({ params }) {
                       {title}
                     </h1>
                     <div className="mb-4">
-                      <span className="text-xl text-graphite">{formatPriceEur(price, category).eurText}</span>
+                      <span className="text-xl text-graphite">{formatPriceEur(price, category, locale).eurText}</span>
                       {!hidePriceVat && (
                         <span className="block text-xs text-gray-500 mt-0.5">{priceIncludesVat ? t.priceWithVat : t.priceWithoutVat}</span>
                       )}

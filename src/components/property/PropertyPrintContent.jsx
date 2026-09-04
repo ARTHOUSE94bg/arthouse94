@@ -46,8 +46,7 @@ export default function PropertyPrintContent({ property, locale = 'bg', listingU
   const typeLabel = tp[type] ?? propertyTypes.find((opt) => opt.value === type)?.label ?? type;
   const categoryLabel = category === 'sale' ? (tp.sale ?? 'Продажба') : (tp.rent ?? 'Наем');
   const isEn = locale === 'en';
-  const { eurText: rawEurText } = formatPriceEur(price, category);
-  const eurText = isEn ? rawEurText.replace('/месец', '/month') : rawEurText;
+  const { eurText } = formatPriceEur(price, category, locale);
   const pricePerSqm = !hidePricePerSqm && area > 0 ? Math.round((price ?? 0) / area) : null;
   const imageUrl = images?.[0] || '/images/placeholder-property.jpg';
 

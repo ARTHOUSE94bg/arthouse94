@@ -125,13 +125,13 @@ export default function PropertyCard({
       <div className="p-5 flex flex-col grow">
         <div className="mb-2 space-y-1">
           {(() => {
-            const { eurText } = formatPriceEur(price, category);
+            const { eurText } = formatPriceEur(price, category, locale);
             const vatLabel = !hidePriceVat
               ? (priceIncludesVat ? (t.priceWithVat ?? 'с включено ДДС') : (t.priceWithoutVat ?? 'без включено ДДС'))
               : null;
             const pricePerSqm = area > 0 ? (price ?? 0) / area : null;
             const perSqmText = !hidePricePerSqm && pricePerSqm != null
-              ? `${Math.round(pricePerSqm)} EUR/м²${category === 'rent' ? '/мес' : ''}`
+              ? `${Math.round(pricePerSqm)} EUR/м²${category === 'rent' ? (t.pricePerSqmRentSuffix ?? (locale === 'en' ? '/month' : '/мес')) : ''}`
               : null;
             return (
               <>
