@@ -13,6 +13,7 @@ import {
   CONTACT_EMAIL,
   formatPriceEur,
 } from '@/lib/constants';
+import PropertyPrice from '@/components/property/PropertyPrice';
 import { getTranslations } from '@/lib/translations';
 import { Section, Container, Card, LinkButton } from '@/components/ui';
 import {
@@ -434,7 +435,7 @@ export default async function PropertyDetailPage({ params }) {
   const { title, description, features, priceNote } = display;
   const titleHasDigits = /\d/.test(String(title ?? ''));
   const {
-    type, category, status, price, area, rooms, floor,
+    type, category, status, price, oldPrice, area, rooms, floor,
     totalFloors, yearBuilt, yearBuiltStatus, images, mapUrl, videoUrl, createdAt,
     gaz, tec, hidePricePerSqm, priceIncludesVat, hidePriceVat, constructionType, code,
   } = property;
@@ -573,7 +574,14 @@ export default async function PropertyDetailPage({ params }) {
                     {title}
                   </h1>
                   <div className="text-graphite">
-                    <span className="text-3xl">{formatPriceEur(price, category, locale).eurText}</span>
+                    <PropertyPrice
+                      price={price}
+                      oldPrice={oldPrice}
+                      category={category}
+                      locale={locale}
+                      className="text-3xl"
+                      oldClassName="line-through text-gray-400 mr-3 text-2xl font-normal"
+                    />
                     {!hidePriceVat && (
                       <span className="block text-xs text-gray-500 mt-0.5">{priceIncludesVat ? t.priceWithVat : t.priceWithoutVat}</span>
                     )}
@@ -680,7 +688,14 @@ export default async function PropertyDetailPage({ params }) {
                       {title}
                     </h1>
                     <div className="mb-4">
-                      <span className="text-xl text-graphite">{formatPriceEur(price, category, locale).eurText}</span>
+                      <PropertyPrice
+                        price={price}
+                        oldPrice={oldPrice}
+                        category={category}
+                        locale={locale}
+                        className="text-xl text-graphite"
+                        oldClassName="line-through text-gray-400 mr-2 text-base font-normal"
+                      />
                       {!hidePriceVat && (
                         <span className="block text-xs text-gray-500 mt-0.5">{priceIncludesVat ? t.priceWithVat : t.priceWithoutVat}</span>
                       )}

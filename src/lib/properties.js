@@ -34,6 +34,7 @@ function transformProperty(row) {
     type: row.type ?? '',
     status: row.status ?? PROPERTY_STATUS.ACTIVE,
     price: row.price != null ? parseFloat(row.price) : 0,
+    oldPrice: row.old_price != null ? parseFloat(row.old_price) : null,
     currency: row.currency ?? 'EUR',
     area: row.area != null ? parseFloat(row.area) : 0,
     rooms: row.rooms ?? null,
@@ -375,6 +376,10 @@ function transformToSupabase(property) {
     type: property.type,
     status: property.status || PROPERTY_STATUS.ACTIVE,
     price: property.price,
+    old_price:
+      property.oldPrice != null && property.oldPrice !== '' && Number.isFinite(Number(property.oldPrice))
+        ? Number(property.oldPrice)
+        : null,
     currency: property.currency || 'EUR',
     area: property.area,
     rooms: property.rooms || null,
@@ -527,6 +532,7 @@ export async function cloneProperty(id) {
     type: prop.type,
     status: prop.status,
     price: prop.price,
+    oldPrice: prop.oldPrice,
     currency: prop.currency || 'EUR',
     area: prop.area,
     rooms: prop.rooms,

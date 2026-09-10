@@ -7,10 +7,10 @@ import {
   CONTACT_EMAIL,
   SITE_URL,
   SITE_WEBSITE,
-  formatPriceEur,
 } from '@/lib/constants';
 import { getDisplayText, getLocationLine } from '@/lib/properties';
 import { getTranslations } from '@/lib/translations';
+import PropertyPrice from '@/components/property/PropertyPrice';
 
 const PRINT_BODY = 'text-base text-graphite font-sans leading-snug';
 const PRINT_HEADING = 'text-lg font-semibold text-graphite font-sans';
@@ -28,6 +28,7 @@ export default function PropertyPrintContent({ property, locale = 'bg', listingU
     category,
     type,
     price,
+    oldPrice,
     area,
     rooms,
     floor,
@@ -46,7 +47,6 @@ export default function PropertyPrintContent({ property, locale = 'bg', listingU
   const typeLabel = tp[type] ?? propertyTypes.find((opt) => opt.value === type)?.label ?? type;
   const categoryLabel = category === 'sale' ? (tp.sale ?? 'Продажба') : (tp.rent ?? 'Наем');
   const isEn = locale === 'en';
-  const { eurText } = formatPriceEur(price, category, locale);
   const pricePerSqm = !hidePricePerSqm && area > 0 ? Math.round((price ?? 0) / area) : null;
   const imageUrl = images?.[0] || '/images/placeholder-property.jpg';
 
@@ -121,7 +121,14 @@ export default function PropertyPrintContent({ property, locale = 'bg', listingU
           </div>
 
           <div>
-            <p className={PRINT_PRICE}>{eurText}</p>
+            <PropertyPrice
+              price={price}
+              oldPrice={oldPrice}
+              category={category}
+              locale={locale}
+              className={PRINT_PRICE}
+              oldClassName="line-through text-gray-400 mr-2 font-normal text-base"
+            />
             {priceIncludesVat != null && !hidePriceVat && (
               <p className="text-sm text-graphite-light font-sans">{priceIncludesVat ? tp.priceWithVat : tp.priceWithoutVat}</p>
             )}

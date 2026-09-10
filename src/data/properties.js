@@ -57,7 +57,6 @@ export const PROPERTY_STATUS = {
 
 export const CURRENCY = {
   EUR: 'EUR',
-  BGN: 'BGN',
 };
 
 // =============================================================================
@@ -75,7 +74,8 @@ export const CURRENCY = {
  * @property {string} type - Тип имот (едностаен, двустаен, мезонет, къща, вила, парцел, и др.)
  * @property {('active'|'pending'|'sold'|'rented'|'inactive')} status - Статус
  * @property {number} price - Цена
- * @property {('EUR'|'BGN')} currency - Валута
+ * @property {number|null} [oldPrice] - Стара цена (EUR); ако е зададена, се показва задраскана
+ * @property {('EUR')} currency - Валута (само EUR)
  * @property {number} area - Площ в м²
  * @property {number|null} rooms - Брой стаи
  * @property {number|null} floor - Етаж

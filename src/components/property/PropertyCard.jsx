@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import { DEFAULT_PROPERTY_IMAGE, formatPriceEur } from '@/lib/constants';
+import { DEFAULT_PROPERTY_IMAGE } from '@/lib/constants';
 import { getDisplayText, getLocationLine } from '@/lib/properties';
 import { getTranslations } from '@/lib/translations';
 import { ArrowsPointingOutIcon, MapPinIcon, BoltIcon, FireIcon } from '@heroicons/react/24/outline';
 import { RoomsIcon } from '@/components/icons';
 import { Badge, LinkButton } from '@/components/ui';
 import SafeImage from '@/components/ui/SafeImage';
+import PropertyPrice from '@/components/property/PropertyPrice';
 
 const cardStyle = 'bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col h-full';
 /** Единен размер за всички текстове в тялото на картичката */
@@ -35,6 +36,7 @@ export default function PropertyCard({
     category,
     status,
     price,
+    oldPrice,
     area,
     rooms,
     floor,
@@ -125,7 +127,6 @@ export default function PropertyCard({
       <div className="p-5 flex flex-col grow">
         <div className="mb-2 space-y-1">
           {(() => {
-            const { eurText } = formatPriceEur(price, category, locale);
             const vatLabel = !hidePriceVat
               ? (priceIncludesVat ? (t.priceWithVat ?? 'с включено ДДС') : (t.priceWithoutVat ?? 'без включено ДДС'))
               : null;
@@ -135,7 +136,14 @@ export default function PropertyCard({
               : null;
             return (
               <>
-                <span className={`block ${cardText} font-medium`}>{eurText}</span>
+                <PropertyPrice
+                  price={price}
+                  oldPrice={oldPrice}
+                  category={category}
+                  locale={locale}
+                  className={`block ${cardText} font-medium`}
+                  oldClassName="line-through text-gray-400 mr-2 font-normal"
+                />
                 {perSqmText && <span className={`block ${cardTextMuted}`}>{perSqmText}</span>}
                 {vatLabel && <span className={`block ${cardTextMuted}`}>{vatLabel}</span>}
               </>

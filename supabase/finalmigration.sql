@@ -66,3 +66,13 @@ ALTER TABLE properties
   ADD COLUMN IF NOT EXISTS hide_price_vat BOOLEAN NOT NULL DEFAULT FALSE;
 
 COMMENT ON COLUMN properties.hide_price_vat IS 'TRUE = не показвай с/без ДДС в клиентската част';
+
+-- =============================================================================
+-- 4) properties.old_price – опционална стара цена (EUR), задраскана при клиента
+-- =============================================================================
+
+ALTER TABLE properties
+  ADD COLUMN IF NOT EXISTS old_price DECIMAL(12, 2) NULL
+  CHECK (old_price IS NULL OR old_price >= 0);
+
+COMMENT ON COLUMN properties.old_price IS 'Опционална стара цена в EUR; при наличие се показва задраскана до актуалната';

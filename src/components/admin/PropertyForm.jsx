@@ -36,6 +36,7 @@ export default function PropertyForm({ property = null, isDemo = false }) {
     type: property?.type || 'apartment',
     status: property?.status || PROPERTY_STATUS.ACTIVE,
     price: property?.price || '',
+    oldPrice: property?.oldPrice ?? '',
     priceNote: property?.priceNote ?? '',
     priceNoteEn: property?.priceNoteEn ?? '',
     currency: 'EUR',
@@ -183,6 +184,10 @@ export default function PropertyForm({ property = null, isDemo = false }) {
       code: codeTrimmed || null,
       currency: 'EUR',
       price: Number(formData.price) || 0,
+      oldPrice:
+        formData.oldPrice !== '' && formData.oldPrice != null && Number.isFinite(Number(formData.oldPrice))
+          ? Number(formData.oldPrice)
+          : null,
       area: Number(formData.area) || 0,
       rooms: formData.rooms ? Number(formData.rooms) : null,
       floor: parseOptionalFloor(formData.floor),
@@ -603,6 +608,25 @@ export default function PropertyForm({ property = null, isDemo = false }) {
               placeholder="185000"
             />
             <p className="mt-1 text-xs text-gray-500">Цената се въвежда в евро (EUR).</p>
+          </div>
+
+          <div>
+            <label htmlFor="oldPrice" className="block text-sm text-gray-700 mb-1">
+              Стара цена
+            </label>
+            <input
+              type="number"
+              id="oldPrice"
+              name="oldPrice"
+              value={formData.oldPrice}
+              onChange={handleChange}
+              min="0"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="по желание"
+            />
+            <p className="mt-1 text-xs text-gray-500">
+              Опционално (EUR). Ако е попълнена, при клиента се показва задраскана до актуалната цена.
+            </p>
           </div>
 
           <div>
