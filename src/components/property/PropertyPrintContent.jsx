@@ -127,7 +127,7 @@ export default function PropertyPrintContent({ property, locale = 'bg', listingU
               category={category}
               locale={locale}
               className={PRINT_PRICE}
-              oldClassName="line-through text-gray-400 mr-2 font-normal text-base"
+              oldClassName="line-through mr-2 font-normal text-base"
             />
             {priceIncludesVat != null && !hidePriceVat && (
               <p className="text-sm text-graphite-light font-sans">{priceIncludesVat ? tp.priceWithVat : tp.priceWithoutVat}</p>

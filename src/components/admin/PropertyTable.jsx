@@ -169,7 +169,7 @@ export default function PropertyTable({ properties, isDemo = false }) {
                           oldPrice={property.oldPrice}
                           category={property.category}
                           className="text-gray-900"
-                          oldClassName="line-through text-gray-400 mr-1.5"
+                          oldClassName="line-through mr-1.5"
                         />
                         <span className="block text-xs text-gray-500">{vatLabel}</span>
                       </span>

@@ -4,6 +4,7 @@ import { formatPriceEur } from '@/lib/constants';
 
 /**
  * Цена в EUR; ако има стара цена – показва я задраскана преди актуалната.
+ * При стара цена: старата е по-тъмна (graphite), новата е в brand синьо (cadetblue).
  */
 export default function PropertyPrice({
   price,
@@ -11,7 +12,7 @@ export default function PropertyPrice({
   category,
   locale = 'bg',
   className = '',
-  oldClassName = 'line-through text-gray-400 mr-2',
+  oldClassName = 'line-through mr-2 font-normal',
   currentClassName = '',
   as: Tag = 'span',
 }) {
@@ -27,8 +28,12 @@ export default function PropertyPrice({
 
   return (
     <Tag className={className}>
-      {oldText && <span className={oldClassName}>{oldText}</span>}
-      <span className={currentClassName}>{eurText}</span>
+      {oldText && (
+        <span className={`text-graphite ${oldClassName}`.trim()}>{oldText}</span>
+      )}
+      <span className={`${oldText ? 'text-cadetblue' : ''} ${currentClassName}`.trim()}>
+        {eurText}
+      </span>
     </Tag>
   );
 }

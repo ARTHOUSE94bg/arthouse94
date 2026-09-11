@@ -142,7 +142,7 @@ export default function PropertyCard({
                   category={category}
                   locale={locale}
                   className={`block ${cardText} font-medium`}
-                  oldClassName="line-through text-gray-400 mr-2 font-normal"
+                  oldClassName="line-through mr-2 font-normal"
                 />
                 {perSqmText && <span className={`block ${cardTextMuted}`}>{perSqmText}</span>}
                 {vatLabel && <span className={`block ${cardTextMuted}`}>{vatLabel}</span>}

@@ -580,7 +580,7 @@ export default async function PropertyDetailPage({ params }) {
                       category={category}
                       locale={locale}
                       className="text-3xl"
-                      oldClassName="line-through text-gray-400 mr-3 text-2xl font-normal"
+                      oldClassName="line-through mr-3 text-2xl font-normal"
                     />
                     {!hidePriceVat && (
                       <span className="block text-xs text-gray-500 mt-0.5">{priceIncludesVat ? t.priceWithVat : t.priceWithoutVat}</span>
@@ -694,7 +694,7 @@ export default async function PropertyDetailPage({ params }) {
                         category={category}
                         locale={locale}
                         className="text-xl text-graphite"
-                        oldClassName="line-through text-gray-400 mr-2 text-base font-normal"
+                        oldClassName="line-through mr-2 text-base font-normal"
                       />
                       {!hidePriceVat && (
                         <span className="block text-xs text-gray-500 mt-0.5">{priceIncludesVat ? t.priceWithVat : t.priceWithoutVat}</span>
